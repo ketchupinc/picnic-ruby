@@ -1,4 +1,4 @@
-require "net/http"
+require "net/https"
 require "uri"
 require "json"
 
@@ -9,6 +9,7 @@ class Picnic
 
     uri = URI.parse(BASE_URL)
     @http = Net::HTTP.new(uri.host, uri.port)
+    @http.use_ssl = true if BASE_URL.start_with?("https")
   end
 
   def list_websites
